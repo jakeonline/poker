@@ -15,8 +15,8 @@ public class ThreeOfAKindTieBreaker implements Comparator<PokerHand> {
     @Override
     public int compare(PokerHand hand1, PokerHand hand2) {
 
-        ThreeOfAKindGroups hand1Groups = service.getGroups(hand1);
-        ThreeOfAKindGroups hand2Groups = service.getGroups(hand2);
+        PokerHandGrouping hand1Groups = service.getGroups(hand1);
+        PokerHandGrouping hand2Groups = service.getGroups(hand2);
 
         PokerHand hand1Combo = hand1Groups.getCombination().get(0);
         PokerHand hand2Combo = hand2Groups.getCombination().get(0);

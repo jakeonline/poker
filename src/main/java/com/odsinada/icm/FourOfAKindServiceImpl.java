@@ -4,36 +4,54 @@ import java.util.*;
 
 public class FourOfAKindServiceImpl implements FourOfAKindService {
 
+    private static final int COUNT = 4;
+
     @Override
-    public FourOfAKindGroups getGroups(PokerHand hand) {
-        FourOfAKindGroups groups = new FourOfAKindGroups();
+    public PokerHandGrouping getGroups(PokerHand hand) {
+        PokerHandGrouping grouping = new PokerHandGrouping();
 
         List<PokerHand> combinations = new ArrayList<>();
 
-        Map<Integer, List<Card>> cardTypeGrouping = new HashMap<>();
-        for (Card eachCard : hand.getCards()) {
+        Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
-            List<Card> cardList = cardTypeGrouping.get(eachCard.getRank());
-            if (cardList == null) {
-                cardList = new ArrayList<>();
-                cardTypeGrouping.put(eachCard.getRank(), cardList);
-            }
-
-            cardList.add(eachCard);
-
+        List<Card> fourOfAKindCards = getFourOfAKindCards(cardTypeGrouping);
+        if (fourOfAKindCards != null) {
+            combinations.add(new PokerHand(fourOfAKindCards));
         }
 
-        Optional<Map.Entry<Integer, List<Card>>> combinationFourOfAKind = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 4).findFirst();
-        if (combinationFourOfAKind.isPresent()) {
-            combinations.add(new PokerHand(combinationFourOfAKind.get().getValue()));
+        List<Card> nonFourOfAKindCards = getNonFourOfAKindCards(cardTypeGrouping);
+
+        grouping.setCombination(combinations);
+        grouping.setNonCombination(new PokerHand(nonFourOfAKindCards));
+
+        return grouping;
+    }
+
+    private List<Card> getNonFourOfAKindCards(Map<String, List<Card>> cardTypeGrouping) {
+        List<Card> nonFourOfAKindCards = new ArrayList<>();
+        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != 4).forEach(t -> nonFourOfAKindCards.addAll(t.getValue()));
+        return nonFourOfAKindCards;
+    }
+
+    private List<Card> getFourOfAKindCards(Map<String, List<Card>> cardTypeGrouping) {
+        List<Card> fourOfAKindCards = null;
+        Optional<Map.Entry<String, List<Card>>> fourOfAKindGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == COUNT).findFirst();
+
+        if(fourOfAKindGroup.isPresent()){
+            fourOfAKindCards = new ArrayList<>(fourOfAKindGroup.get().getValue());
         }
 
-        List<Card> nonCombinationCards = new ArrayList<>();
-        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != 4).forEach(t -> nonCombinationCards.addAll(t.getValue()));
+        return fourOfAKindCards;
+    }
 
-        groups.setCombination(combinations);
-        groups.setNonCombination(new PokerHand(nonCombinationCards));
+    @Override
+    public boolean isCombinationPresent(PokerHand hand) {
+        Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
-        return groups;
+        List<Card> fourOfAKindCards = getFourOfAKindCards(cardTypeGrouping);
+        if (fourOfAKindCards != null) {
+            return true;
+        }
+        return false;
     }
 }

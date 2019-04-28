@@ -21,7 +21,7 @@ public class FourOfAKindServiceImplTest {
         PokerHand hand1 = new PokerHand("5S 5D 5C 5H 2D");
 
         // act
-        FourOfAKindGroups groups = service.getGroups(hand1);
+        PokerHandGrouping groups = service.getGroups(hand1);
 
 
         // assert
@@ -44,7 +44,7 @@ public class FourOfAKindServiceImplTest {
 
 
         // act
-        FourOfAKindGroups groups = service.getGroups(hand1);
+        PokerHandGrouping groups = service.getGroups(hand1);
 
 
         // assert

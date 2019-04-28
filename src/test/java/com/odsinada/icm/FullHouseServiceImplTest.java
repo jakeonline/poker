@@ -21,7 +21,7 @@ public class FullHouseServiceImplTest {
         PokerHand hand1 = new PokerHand("5S 5D 5C 2H 2D");
 
         // act
-        FullHouseGroups groups = service.getGroups(hand1);
+        PokerHandGrouping groups = service.getGroups(hand1);
 
 
         // assert
@@ -46,7 +46,7 @@ public class FullHouseServiceImplTest {
 
 
         // act
-        FullHouseGroups groups = service.getGroups(hand1);
+        PokerHandGrouping groups = service.getGroups(hand1);
 
 
         // assert

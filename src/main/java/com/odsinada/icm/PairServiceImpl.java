@@ -4,6 +4,8 @@ import java.util.*;
 
 public class PairServiceImpl implements PairService {
 
+    public static final int COUNT = 2;
+
     @Override
     public PokerHandGrouping getGroups(PokerHand hand) {
         PokerHandGrouping grouping = new PokerHandGrouping();
@@ -25,9 +27,20 @@ public class PairServiceImpl implements PairService {
         return grouping;
     }
 
+    @Override
+    public boolean isCombinationPresent(PokerHand hand) {
+        Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
+
+        List<Card> pairCards = getPairCards(cardTypeGrouping);
+        if (pairCards != null) {
+            return true;
+        }
+        return false;
+    }
+
     private List<Card> getNonPairCards(Map<String, List<Card>> cardTypeGrouping) {
         List<Card> nonPairCards = new ArrayList<>();
-        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != 2).forEach(t -> nonPairCards.addAll(t.getValue()));
+        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != COUNT).forEach(t -> nonPairCards.addAll(t.getValue()));
         return nonPairCards;
     }
 
@@ -40,4 +53,5 @@ public class PairServiceImpl implements PairService {
 
         return pairCards;
     }
+
 }

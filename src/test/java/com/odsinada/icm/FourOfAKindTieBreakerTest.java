@@ -30,10 +30,10 @@ public class FourOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyWinningFirstFourOfAKind(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("4S 4C 4D 4H")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
@@ -50,10 +50,10 @@ public class FourOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyWinningSecondFourOfAKind(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("6S 6C 6D 5H")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
@@ -70,10 +70,10 @@ public class FourOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyTiedFourOfAKind(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
@@ -90,11 +90,11 @@ public class FourOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyTiedFourOfAKindWinningFirstFourOfAKind(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
         hand1Group.setNonCombination(new PokerHand("3S"));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
         hand2Group.setNonCombination(new PokerHand("2S"));
 

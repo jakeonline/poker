@@ -1,5 +1,4 @@
 package com.odsinada.icm;
 
-public interface FourOfAKindService {
-    FourOfAKindGroups getGroups(PokerHand hand);
+public interface FourOfAKindService extends CombinationService {
 }

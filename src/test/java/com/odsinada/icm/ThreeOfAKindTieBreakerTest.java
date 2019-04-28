@@ -30,10 +30,10 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyWinningFirstThreeOfAKind(){
         // arrange
-        ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D")));
 
-        ThreeOfAKindGroups hand2Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("4S 4C 4D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
@@ -50,10 +50,10 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyWinningSecondThreeOfAKind(){
         // arrange
-        ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D")));
 
-        ThreeOfAKindGroups hand2Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("6S 6C 6D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
@@ -70,10 +70,10 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyTiedThreeOfAKind(){
         // arrange
-        ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D")));
 
-        ThreeOfAKindGroups hand2Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
@@ -90,11 +90,11 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyTiedThreeOfAKindWinningFirstThreeOfAKind(){
         // arrange
-        ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
         hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D")));
         hand1Group.setNonCombination(new PokerHand("4S 3S"));
 
-        ThreeOfAKindGroups hand2Group = new ThreeOfAKindGroups();
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
         hand2Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D")));
         hand2Group.setNonCombination(new PokerHand("4S 2S"));
 

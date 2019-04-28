@@ -70,51 +70,15 @@ public class PokerHand implements Hand {
                 combinations.add(Combination.HIGH_CARD);
             }
 
-            Map<String, Integer> cardTypeTally = getCardTypeTally();
-
-            if (!this.cards.isEmpty() && C_JOKER != getHighCard()) {
-                Optional<Map.Entry<String, Integer>> cardTypeHighestTally = cardTypeTally.entrySet().stream()
-                        .max((cardCount1, cardCount2) -> cardCount1.getValue() - cardCount2.getValue());
-                Integer cardTypeTallyCount = cardTypeHighestTally.isPresent() ? cardTypeHighestTally.get().getValue() : 0;
-
-                switch (cardTypeTallyCount) {
-                    case 4: combinations.add(Combination.FOUR_OF_A_KIND);
-                    case 3: combinations.add(Combination.THREE_OF_A_KIND);
-                    case 2: combinations.add(Combination.PAIR);
+            for (Combination combination : Combination.values()) {
+                CombinationService combinationService = combination.getCombinationService();
+                if( combinationService != null && combinationService.isCombinationPresent(this)){
+                    combinations.add(combination);
                 }
             }
 
-            if (!this.cards.isEmpty() && C_JOKER != getHighCard()) {
-                if (cardTypeTally.size() == 2) {
-                    Iterator<Map.Entry<String, Integer>> cardTypeTallyIter = cardTypeTally.entrySet().iterator();
-                    Integer firstTypeCount = cardTypeTallyIter.next().getValue();
-                    Integer secondTypeCount = cardTypeTallyIter.next().getValue();
-
-                    List<Integer> typeCounts = Arrays.asList(firstTypeCount, secondTypeCount);
-
-                    if (typeCounts.contains(3) && typeCounts.contains(2)) {
-                        combinations.add(Combination.FULL_HOUSE);
-                    }
-
-                }
-
-            }
         }
         return combinations;
-    }
-
-    private Map<String, Integer> getCardTypeTally() {
-        Map<String, Integer> cardTypeTally = new HashMap<>();
-        for (Card currCard : cards) {
-
-            Integer cardTypeCount = cardTypeTally.get(currCard.getType());
-            if (cardTypeCount == null) {
-                cardTypeTally.put(currCard.getType(), 1);
-            } else {
-                cardTypeTally.put(currCard.getType(), ++cardTypeCount);
-            }
-        }
-        return cardTypeTally;
     }
 
     public Combination getHighestCombination() {

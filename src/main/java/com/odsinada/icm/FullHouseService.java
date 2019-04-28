@@ -1,5 +1,4 @@
 package com.odsinada.icm;
 
-public interface FullHouseService {
-    FullHouseGroups getGroups(PokerHand hand);
+public interface FullHouseService extends CombinationService {
 }
