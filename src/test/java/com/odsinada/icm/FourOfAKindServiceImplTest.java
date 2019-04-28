@@ -1,0 +1,53 @@
+package com.odsinada.icm;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+public class FourOfAKindServiceImplTest {
+
+    private FourOfAKindServiceImpl service;
+
+    @Before
+    public void setup(){
+        service = new FourOfAKindServiceImpl();
+    }
+
+    @Test
+    public void shouldGetCombination() {
+        // arrange
+        HandBase hand1 = new HandBase("5S 5D 5C 5H 2D");
+
+        // act
+        FourOfAKindGroups groups = service.getGroups(hand1);
+
+
+        // assert
+        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "S")), equalTo(true));
+        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "D")), equalTo(true));
+        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "C")), equalTo(true));
+        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "H")), equalTo(true));
+        assertThat(groups.getCombination().get(0).getCards().size(), equalTo(4));
+
+        assertThat(groups.getNonCombination().getCards().contains(Card.of("2", "D")), equalTo(true));
+        assertThat(groups.getNonCombination().getCards().size(), equalTo(1));
+    }
+
+
+    @Test
+    public void shouldReturnNoCombinationWhenInexistent() {
+
+        // arrange
+        HandBase hand1 = new HandBase("6S 5D 4S 3S 2D");
+
+
+        // act
+        FourOfAKindGroups groups = service.getGroups(hand1);
+
+
+        // assert
+        assertThat(groups.getCombination().isEmpty(), equalTo(true));
+    }
+}
