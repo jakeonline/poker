@@ -1,5 +1,9 @@
-package com.odsinada.icm;
+package com.odsinada.icm.fullhouse;
 
+import com.odsinada.icm.Card;
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.PokerHandGrouping;
+import com.odsinada.icm.fullhouse.FullHouseServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 

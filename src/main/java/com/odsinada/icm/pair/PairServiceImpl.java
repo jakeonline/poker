@@ -1,4 +1,9 @@
-package com.odsinada.icm;
+package com.odsinada.icm.pair;
+
+import com.odsinada.icm.Card;
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.PokerHandGrouping;
+import com.odsinada.icm.PokerHandUtil;
 
 import java.util.*;
 

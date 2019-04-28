@@ -1,5 +1,15 @@
 package com.odsinada.icm;
 
+import com.odsinada.icm.fourofakind.FourOfAKindServiceImpl;
+import com.odsinada.icm.fourofakind.FourOfAKindTieBreaker;
+import com.odsinada.icm.fullhouse.FullHouseServiceImpl;
+import com.odsinada.icm.fullhouse.FullHouseTieBreaker;
+import com.odsinada.icm.highcard.HighCardTieBreaker;
+import com.odsinada.icm.pair.PairCardTieBreaker;
+import com.odsinada.icm.pair.PairServiceImpl;
+import com.odsinada.icm.threeofakind.ThreeOfAKindServiceImpl;
+import com.odsinada.icm.threeofakind.ThreeOfAKindTieBreaker;
+
 import java.util.Comparator;
 
 public enum Combination {

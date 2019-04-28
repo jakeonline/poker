@@ -1,5 +1,7 @@
-package com.odsinada.icm;
+package com.odsinada.icm.highcard;
 
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.highcard.HighCardTieBreaker;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,13 +1,18 @@
-package com.odsinada.icm;
+package com.odsinada.icm.fourofakind;
+
+import com.odsinada.icm.highcard.HighCardTieBreaker;
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.PokerHandGrouping;
 
 import java.util.Comparator;
 
-public class ThreeOfAKindTieBreaker implements Comparator<PokerHand> {
 
-    private final ThreeOfAKindService service;
+public class FourOfAKindTieBreaker implements Comparator<PokerHand> {
+
+    private final FourOfAKindService service;
     private HighCardTieBreaker highCardTieBreaker;
 
-    public ThreeOfAKindTieBreaker(ThreeOfAKindService service){
+    public FourOfAKindTieBreaker(FourOfAKindService service) {
         this.service = service;
         this.highCardTieBreaker = new HighCardTieBreaker();
     }
@@ -39,3 +44,4 @@ public class ThreeOfAKindTieBreaker implements Comparator<PokerHand> {
         }
     }
 }
+

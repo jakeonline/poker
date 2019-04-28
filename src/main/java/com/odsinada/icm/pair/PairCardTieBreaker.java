@@ -1,4 +1,8 @@
-package com.odsinada.icm;
+package com.odsinada.icm.pair;
+
+import com.odsinada.icm.highcard.HighCardTieBreaker;
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.PokerHandGrouping;
 
 import java.util.Comparator;
 

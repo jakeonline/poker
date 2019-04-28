@@ -1,18 +1,17 @@
-package com.odsinada.icm;
+package com.odsinada.icm.threeofakind;
+
+import com.odsinada.icm.PokerHand;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PairGroups {
+public class ThreeOfAKindGroups {
     private List<PokerHand> combination = new ArrayList<>();
     private PokerHand nonCombination = new PokerHand("");
 
+
     public void setCombination(List<PokerHand> combination) {
         this.combination = combination;
-    }
-
-    public void setNonCombination(PokerHand nonCombination) {
-        this.nonCombination = nonCombination;
     }
 
     public List<PokerHand> getCombination() {
@@ -21,5 +20,9 @@ public class PairGroups {
 
     public PokerHand getNonCombination() {
         return nonCombination;
+    }
+
+    public void setNonCombination(PokerHand nonCombination) {
+        this.nonCombination = nonCombination;
     }
 }

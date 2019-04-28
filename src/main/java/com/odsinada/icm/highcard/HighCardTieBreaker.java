@@ -1,4 +1,7 @@
-package com.odsinada.icm;
+package com.odsinada.icm.highcard;
+
+import com.odsinada.icm.Card;
+import com.odsinada.icm.PokerHand;
 
 import java.util.Comparator;
 import java.util.List;

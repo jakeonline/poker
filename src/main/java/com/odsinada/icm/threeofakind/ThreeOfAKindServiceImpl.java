@@ -1,11 +1,19 @@
-package com.odsinada.icm;
+package com.odsinada.icm.threeofakind;
+
+import com.odsinada.icm.Card;
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.PokerHandGrouping;
+import com.odsinada.icm.PokerHandUtil;
 
 import java.util.*;
 
-public class FullHouseServiceImpl implements FullHouseService {
+public class ThreeOfAKindServiceImpl implements ThreeOfAKindService {
+
+    public static final int COUNT = 3;
+
     @Override
     public PokerHandGrouping getGroups(PokerHand hand) {
-        PokerHandGrouping groups = new PokerHandGrouping();
+        PokerHandGrouping grouping = new PokerHandGrouping();
 
         List<PokerHand> combinations = new ArrayList<>();
 
@@ -16,14 +24,18 @@ public class FullHouseServiceImpl implements FullHouseService {
             combinations.add(new PokerHand(threeOfAKindCards));
         }
 
-        List<Card> pairCards = getPairCards(cardTypeGrouping);
-        if (pairCards != null) {
-            combinations.add(new PokerHand(pairCards));
-        }
+        List<Card> nonThreeOfAKindCards = getNonThreeOfAKindCards(cardTypeGrouping);
 
-        groups.setCombination(combinations);
+        grouping.setCombination(combinations);
+        grouping.setNonCombination(new PokerHand(nonThreeOfAKindCards));
 
-        return groups;
+        return grouping;
+    }
+
+    private List<Card> getNonThreeOfAKindCards(Map<String, List<Card>> cardTypeGrouping) {
+        List<Card> nonThreeOfAKindCards = new ArrayList<>();
+        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != COUNT).forEach(t -> nonThreeOfAKindCards.addAll(t.getValue()));
+        return nonThreeOfAKindCards;
     }
 
     private List<Card> getThreeOfAKindCards(Map<String, List<Card>> cardTypeGrouping) {
@@ -37,28 +49,14 @@ public class FullHouseServiceImpl implements FullHouseService {
         return threeOfAKindCards;
     }
 
-    private List<Card> getPairCards(Map<String, List<Card>> cardTypeGrouping) {
-        List<Card> pairCards = null;
-        Optional<Map.Entry<String, List<Card>>> pairGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 2).findFirst();
-
-        if(pairGroup.isPresent()){
-            pairCards = new ArrayList<>(pairGroup.get().getValue());
-        }
-
-        return pairCards;
-    }
-
     @Override
     public boolean isCombinationPresent(PokerHand hand) {
         Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
         List<Card> threeOfAKindCards = getThreeOfAKindCards(cardTypeGrouping);
-        List<Card> pairCards = getPairCards(cardTypeGrouping);
-
-        if (threeOfAKindCards != null && pairCards != null) {
+        if (threeOfAKindCards != null) {
             return true;
         }
-
         return false;
     }
 }

@@ -1,24 +1,28 @@
-package com.odsinada.icm;
+package com.odsinada.icm.threeofakind;
 
+import com.odsinada.icm.Card;
+import com.odsinada.icm.PokerHand;
+import com.odsinada.icm.PokerHandGrouping;
+import com.odsinada.icm.threeofakind.ThreeOfAKindServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class FourOfAKindServiceImplTest {
+public class ThreeOfAKindServiceImplTest {
 
-    private FourOfAKindServiceImpl service;
+    private ThreeOfAKindServiceImpl service;
 
     @Before
     public void setup(){
-        service = new FourOfAKindServiceImpl();
+        service = new ThreeOfAKindServiceImpl();
     }
 
     @Test
     public void shouldGetCombination() {
         // arrange
-        PokerHand hand1 = new PokerHand("5S 5D 5C 5H 2D");
+        PokerHand hand1 = new PokerHand("5S 5D 5C 3S 2D");
 
         // act
         PokerHandGrouping groups = service.getGroups(hand1);
@@ -28,11 +32,11 @@ public class FourOfAKindServiceImplTest {
         assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "S")), equalTo(true));
         assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "D")), equalTo(true));
         assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "C")), equalTo(true));
-        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("5", "H")), equalTo(true));
-        assertThat(groups.getCombination().get(0).getCards().size(), equalTo(4));
+        assertThat(groups.getCombination().get(0).getCards().size(), equalTo(3));
 
+        assertThat(groups.getNonCombination().getCards().contains(Card.of("3", "S")), equalTo(true));
         assertThat(groups.getNonCombination().getCards().contains(Card.of("2", "D")), equalTo(true));
-        assertThat(groups.getNonCombination().getCards().size(), equalTo(1));
+        assertThat(groups.getNonCombination().getCards().size(), equalTo(2));
     }
 
 
