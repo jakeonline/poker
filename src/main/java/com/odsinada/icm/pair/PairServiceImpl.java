@@ -51,7 +51,7 @@ public class PairServiceImpl implements PairService {
 
     private List<Card> getPairCards(Map<String, List<Card>> cardTypeGrouping) {
         List<Card> pairCards = null;
-        Optional<Map.Entry<String, List<Card>>> pairGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 2).findFirst();
+        Optional<Map.Entry<String, List<Card>>> pairGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == COUNT).findFirst();
         if(pairGroup.isPresent()){
             pairCards = new ArrayList<>(pairGroup.get().getValue());
         }

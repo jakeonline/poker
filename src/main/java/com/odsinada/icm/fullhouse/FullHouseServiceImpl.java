@@ -8,6 +8,10 @@ import com.odsinada.icm.PokerHandUtil;
 import java.util.*;
 
 public class FullHouseServiceImpl implements FullHouseService {
+
+    private static final int PAIR_COUNT = 2;
+    private static final int THREE_OF_A_KIND_COUNT = 3;
+
     @Override
     public PokerHandGrouping getGroups(PokerHand hand) {
         PokerHandGrouping groups = new PokerHandGrouping();
@@ -33,7 +37,7 @@ public class FullHouseServiceImpl implements FullHouseService {
 
     private List<Card> getThreeOfAKindCards(Map<String, List<Card>> cardTypeGrouping) {
         List<Card> threeOfAKindCards = null;
-        Optional<Map.Entry<String, List<Card>>> threeOfAKindGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 3).findFirst();
+        Optional<Map.Entry<String, List<Card>>> threeOfAKindGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == THREE_OF_A_KIND_COUNT).findFirst();
 
         if(threeOfAKindGroup.isPresent()){
             threeOfAKindCards = new ArrayList<>(threeOfAKindGroup.get().getValue());
@@ -44,7 +48,7 @@ public class FullHouseServiceImpl implements FullHouseService {
 
     private List<Card> getPairCards(Map<String, List<Card>> cardTypeGrouping) {
         List<Card> pairCards = null;
-        Optional<Map.Entry<String, List<Card>>> pairGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 2).findFirst();
+        Optional<Map.Entry<String, List<Card>>> pairGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == PAIR_COUNT).findFirst();
 
         if(pairGroup.isPresent()){
             pairCards = new ArrayList<>(pairGroup.get().getValue());

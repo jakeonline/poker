@@ -34,7 +34,7 @@ public class FourOfAKindServiceImpl implements FourOfAKindService {
 
     private List<Card> getNonFourOfAKindCards(Map<String, List<Card>> cardTypeGrouping) {
         List<Card> nonFourOfAKindCards = new ArrayList<>();
-        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != 4).forEach(t -> nonFourOfAKindCards.addAll(t.getValue()));
+        cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != COUNT).forEach(t -> nonFourOfAKindCards.addAll(t.getValue()));
         return nonFourOfAKindCards;
     }
 
