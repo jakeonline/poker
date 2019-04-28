@@ -12,12 +12,12 @@ public enum Combination {
     private final int rank;
     private Comparator tieBreaker;
 
-    Combination(int rank, Comparator<HandBase> tieBreaker) {
+    Combination(int rank, Comparator<PokerHand> tieBreaker) {
         this.rank = rank;
         this.tieBreaker = tieBreaker;
     }
 
-    public Comparator<HandBase> getTieBreaker() {
+    public Comparator<PokerHand> getTieBreaker() {
         return tieBreaker;
     }
 }

@@ -4,53 +4,46 @@ import java.util.*;
 
 import static com.odsinada.icm.Card.C_JOKER;
 
-public class HandBase implements Hand {
+public class PokerHand implements Hand {
 
-    private HandBaseService service;
-    private String handDetail;
+    private static final String WHITESPACE = " ";
+    private PokerService pokerService;
     private final List<Card> cards = new ArrayList<>(5);
     private Set<Combination> combinations = null;
 
-    public HandBase(String handDetail) {
-        this.handDetail = handDetail;
+    public PokerHand(String handDetail) {
         if (handDetail.length() > 0) {
-            for (String code : handDetail.split(" ")) {
+            for (String code : handDetail.split(WHITESPACE)) {
                 cards.add(Card.of(code.substring(0,1), code.substring(1,2)));
             }
         }
-        this.service = new HandBaseServiceBase();
+        this.pokerService = new PokerServiceImpl();
     }
 
-    public HandBase(List<Card> cards) {
+    public PokerHand(List<Card> cards) {
         this.cards.addAll(cards);
-        this.service = new HandBaseServiceBase();
+        this.pokerService = new PokerServiceImpl();
     }
 
-    public void setService(HandBaseService service) {
-        this.service = service;
+    public void setPokerService(PokerService pokerService) {
+        this.pokerService = pokerService;
     }
 
     @Override
     public Result versus(Hand otherHand) {
         Result result = new ResultBase();
 
-        HandBaseServiceResult serviceResult = service.compare(this, (HandBase) otherHand);
-        result.setWinner(serviceResult.getWinner());
-        result.setLoser(serviceResult.getLoser());
+        PokerResult pokerResult = pokerService.compare(this, (PokerHand) otherHand);
+        result.setWinner(pokerResult.getWinner());
+        result.setLoser(pokerResult.getLoser());
 
         return result;
     }
 
     public Card getHighCard() {
-        return getHighestCard();
-    }
+        this.cards.sort((c1, c2) -> c2.getRank() - c1.getRank());
 
-    private Card getHighestCard() {
-        this.cards.sort((c1, c2) -> c2.getOrder() - c1.getOrder());
-        if(!this.cards.isEmpty()) {
-            return cards.get(0);
-        }
-        return C_JOKER;
+        return this.cards.isEmpty() ? C_JOKER : cards.get(0);
     }
 
     public List<Card> getCards() {
@@ -59,7 +52,7 @@ public class HandBase implements Hand {
 
     @Override
     public String toString(){
-        return this.handDetail;
+        return this.cards.toString();
     }
 
     public Set<Combination> getCombinations() {
@@ -73,16 +66,15 @@ public class HandBase implements Hand {
         if (combinations == null) {
             combinations = new TreeSet<>();
 
-            if (!this.cards.isEmpty() && C_JOKER != getHighestCard()) {
+            if (!this.cards.isEmpty() && C_JOKER != getHighCard()) {
                 combinations.add(Combination.HIGH_CARD);
             }
 
-            Map<Integer, Integer> cardTypeTally = getCardTypeTally();
+            Map<String, Integer> cardTypeTally = getCardTypeTally();
 
-            if (!this.cards.isEmpty() && C_JOKER != getHighestCard()) {
-                Optional<Map.Entry<Integer, Integer>> cardTypeHighestTally = cardTypeTally.entrySet().stream()
-                        .filter(s -> s.getKey() > 0)
-                        .max((cardOrder1, cardOrder2) -> cardOrder1.getValue() - cardOrder2.getValue());
+            if (!this.cards.isEmpty() && C_JOKER != getHighCard()) {
+                Optional<Map.Entry<String, Integer>> cardTypeHighestTally = cardTypeTally.entrySet().stream()
+                        .max((cardCount1, cardCount2) -> cardCount1.getValue() - cardCount2.getValue());
                 Integer cardTypeTallyCount = cardTypeHighestTally.isPresent() ? cardTypeHighestTally.get().getValue() : 0;
 
                 switch (cardTypeTallyCount) {
@@ -92,9 +84,9 @@ public class HandBase implements Hand {
                 }
             }
 
-            if (!this.cards.isEmpty() && C_JOKER != getHighestCard()) {
+            if (!this.cards.isEmpty() && C_JOKER != getHighCard()) {
                 if (cardTypeTally.size() == 2) {
-                    Iterator<Map.Entry<Integer, Integer>> cardTypeTallyIter = cardTypeTally.entrySet().iterator();
+                    Iterator<Map.Entry<String, Integer>> cardTypeTallyIter = cardTypeTally.entrySet().iterator();
                     Integer firstTypeCount = cardTypeTallyIter.next().getValue();
                     Integer secondTypeCount = cardTypeTallyIter.next().getValue();
 
@@ -107,28 +99,19 @@ public class HandBase implements Hand {
                 }
 
             }
-
-            /*
-            for (Map.Entry<Integer, Integer> entry : cardTypeTallyCount.entrySet()) {
-                if (entry.getValue() > 1) {
-
-                    break;
-                }
-            }
-            */
         }
         return combinations;
     }
 
-    private Map<Integer, Integer> getCardTypeTally() {
-        Map<Integer, Integer> cardTypeTally = new HashMap<>();
-        for (Card eachCard : cards) {
+    private Map<String, Integer> getCardTypeTally() {
+        Map<String, Integer> cardTypeTally = new HashMap<>();
+        for (Card currCard : cards) {
 
-            Integer cardTypeCount = cardTypeTally.get(eachCard.getOrder());
+            Integer cardTypeCount = cardTypeTally.get(currCard.getType());
             if (cardTypeCount == null) {
-                cardTypeTally.put(eachCard.getOrder(), 1);
+                cardTypeTally.put(currCard.getType(), 1);
             } else {
-                cardTypeTally.put(eachCard.getOrder(), ++cardTypeCount);
+                cardTypeTally.put(currCard.getType(), ++cardTypeCount);
             }
         }
         return cardTypeTally;

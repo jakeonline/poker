@@ -6,9 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,26 +17,26 @@ public class PairCardTieBreakerTest {
 
     private PairCardTieBreaker tieBreaker;
     @Mock
-    HandBase hand1, hand2;
+    PokerHand hand1, hand2;
     @Mock
-    PairService pairService;
+    PairService service;
 
     @Before
     public void setup(){
-        tieBreaker = new PairCardTieBreaker(pairService);
+        tieBreaker = new PairCardTieBreaker(service);
     }
 
     @Test
     public void shouldIdentifyWinningFirstPair(){
         // arrange
-        PairGroups hand1Group = new PairGroups();
-        hand1Group.setPairs(Arrays.asList(new HandBase("5S 5C")));
+        PokerHandGrouping hand1Groups = new PokerHandGrouping();
+        hand1Groups.setCombination(Arrays.asList(new PokerHand("5S 5C")));
 
-        PairGroups hand2Group = new PairGroups();
-        hand2Group.setPairs(Arrays.asList(new HandBase("4S 4C")));
+        PokerHandGrouping hand2Groups = new PokerHandGrouping();
+        hand2Groups.setCombination(Arrays.asList(new PokerHand("4S 4C")));
 
-        when(pairService.getGroups(hand1)).thenReturn(hand1Group);
-        when(pairService.getGroups(hand2)).thenReturn(hand2Group);
+        when(service.getGroups(hand1)).thenReturn(hand1Groups);
+        when(service.getGroups(hand2)).thenReturn(hand2Groups);
 
         // act
         int compareResult = tieBreaker.compare(hand1, hand2);
@@ -51,14 +49,14 @@ public class PairCardTieBreakerTest {
     @Test
     public void shouldIdentifyWinningSecondPair(){
         // arrange
-        PairGroups hand1Group = new PairGroups();
-        hand1Group.setPairs(Arrays.asList(new HandBase("3S 3C")));
+        PokerHandGrouping hand1Groups = new PokerHandGrouping();
+        hand1Groups.setCombination(Arrays.asList(new PokerHand("3S 3C")));
 
-        PairGroups hand2Group = new PairGroups();
-        hand2Group.setPairs(Arrays.asList(new HandBase("4S 4C")));
+        PokerHandGrouping hand2Groups = new PokerHandGrouping();
+        hand2Groups.setCombination(Arrays.asList(new PokerHand("4S 4C")));
 
-        when(pairService.getGroups(hand1)).thenReturn(hand1Group);
-        when(pairService.getGroups(hand2)).thenReturn(hand2Group);
+        when(service.getGroups(hand1)).thenReturn(hand1Groups);
+        when(service.getGroups(hand2)).thenReturn(hand2Groups);
 
 
         // act
@@ -72,14 +70,14 @@ public class PairCardTieBreakerTest {
     @Test
     public void shouldIdentifyTiedPair(){
         // arrange
-        PairGroups hand1Group = new PairGroups();
-        hand1Group.setPairs(Arrays.asList(new HandBase("3S 3C")));
+        PokerHandGrouping hand1Groups = new PokerHandGrouping();
+        hand1Groups.setCombination(Arrays.asList(new PokerHand("3S 3C")));
 
-        PairGroups hand2Group = new PairGroups();
-        hand2Group.setPairs(Arrays.asList(new HandBase("3H 3D")));
+        PokerHandGrouping hand2Groups = new PokerHandGrouping();
+        hand2Groups.setCombination(Arrays.asList(new PokerHand("3H 3D")));
 
-        when(pairService.getGroups(hand1)).thenReturn(hand1Group);
-        when(pairService.getGroups(hand2)).thenReturn(hand2Group);
+        when(service.getGroups(hand1)).thenReturn(hand1Groups);
+        when(service.getGroups(hand2)).thenReturn(hand2Groups);
 
         // act
         int compareResult = tieBreaker.compare(hand1, hand2);
@@ -90,18 +88,18 @@ public class PairCardTieBreakerTest {
     }
 
     @Test
-    public void shouldIdentifyTiedPairWinningFirstHand(){
+    public void shouldIdentifyTiedPairWinningFirstHighCard(){
         // arrange
-        PairGroups hand1Group = new PairGroups();
-        hand1Group.setPairs(Arrays.asList(new HandBase("3S 3C")));
-        hand1Group.setNonPair(new HandBase("9C"));
+        PokerHandGrouping hand1Group = new PokerHandGrouping();
+        hand1Group.setCombination(Arrays.asList(new PokerHand("3S 3C")));
+        hand1Group.setNonCombination(new PokerHand("9C"));
 
-        PairGroups hand2Group = new PairGroups();
-        hand2Group.setPairs(Arrays.asList(new HandBase("3H 3D")));
-        hand2Group.setNonPair(new HandBase("8C"));
+        PokerHandGrouping hand2Group = new PokerHandGrouping();
+        hand2Group.setCombination(Arrays.asList(new PokerHand("3H 3D")));
+        hand2Group.setNonCombination(new PokerHand("8C"));
 
-        when(pairService.getGroups(hand1)).thenReturn(hand1Group);
-        when(pairService.getGroups(hand2)).thenReturn(hand2Group);
+        when(service.getGroups(hand1)).thenReturn(hand1Group);
+        when(service.getGroups(hand2)).thenReturn(hand2Group);
 
 
         // act
@@ -109,8 +107,5 @@ public class PairCardTieBreakerTest {
 
         // assert
         assertThat(compareResult, equalTo(-1));
-
     }
-
-
 }

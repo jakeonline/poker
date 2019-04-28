@@ -18,7 +18,7 @@ public class FourOfAKindServiceImplTest {
     @Test
     public void shouldGetCombination() {
         // arrange
-        HandBase hand1 = new HandBase("5S 5D 5C 5H 2D");
+        PokerHand hand1 = new PokerHand("5S 5D 5C 5H 2D");
 
         // act
         FourOfAKindGroups groups = service.getGroups(hand1);
@@ -40,7 +40,7 @@ public class FourOfAKindServiceImplTest {
     public void shouldReturnNoCombinationWhenInexistent() {
 
         // arrange
-        HandBase hand1 = new HandBase("6S 5D 4S 3S 2D");
+        PokerHand hand1 = new PokerHand("6S 5D 4S 3S 2D");
 
 
         // act

@@ -3,32 +3,32 @@ package com.odsinada.icm;
 import java.util.Comparator;
 import java.util.List;
 
-public class HighCardTieBreaker implements Comparator<HandBase> {
+public class HighCardTieBreaker implements Comparator<PokerHand> {
 
     @Override
-    public int compare(HandBase hand1, HandBase hand2) {
-        return compareHighCardLoop(hand1, hand2);
+    public int compare(PokerHand hand1, PokerHand hand2) {
+        return recursiveCompareHighCard(hand1, hand2);
     }
 
-    private int compareHighCardLoop(HandBase hand1, HandBase hand2) {
+    private int recursiveCompareHighCard(PokerHand hand1, PokerHand hand2) {
         int compareResult = compareHighCard(hand1, hand2);
 
         if(compareResult == 0){
-            HandBase nextBestHand1 = getNextBestHand(hand1);
-            HandBase nextBestHand2 = getNextBestHand(hand2);
-            compareResult = compareHighCardLoop(nextBestHand1, nextBestHand2);
+            PokerHand nextBestHand1 = getNextBestHand(hand1);
+            PokerHand nextBestHand2 = getNextBestHand(hand2);
+            compareResult = recursiveCompareHighCard(nextBestHand1, nextBestHand2);
         }
 
         return compareResult;
     }
 
-    private HandBase getNextBestHand(HandBase hand) {
+    private PokerHand getNextBestHand(PokerHand hand) {
         List<Card> handCards = hand.getCards();
         handCards.remove(hand.getHighCard());
-        return new HandBase(handCards);
+        return new PokerHand(handCards);
     }
 
-    private int compareHighCard(HandBase hand1, HandBase hand2) {
+    private int compareHighCard(PokerHand hand1, PokerHand hand2) {
         if (hand1.getHighCard().isHigher(hand2.getHighCard())) {
             return -1;
         } else if (hand2.getHighCard().isHigher(hand1.getHighCard())){

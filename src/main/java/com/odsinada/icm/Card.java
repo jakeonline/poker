@@ -59,31 +59,35 @@ public enum Card {
 
     C_JOKER("X", 0, "Y");
 
-    private String value;
-    private int order;
+    private String type;
+    private int rank;
     private String suit;
 
 
-    Card(String value, int order, String suit){
-        this.value = value;
-        this.order = order;
+    Card(String type, int rank, String suit){
+        this.type = type;
+        this.rank = rank;
         this.suit = suit;
     }
 
     public boolean isHigher(Card card) {
-        return this.getOrder() > card.getOrder();
+        return this.getRank() > card.getRank();
     }
 
-    public static Card of(String value, String suit) {
+    public static Card of(String type, String suit) {
         for (Card card : Card.values()) {
-            if (card.value.equals(value) && card.suit.equals(suit)) {
+            if (card.type.equals(type) && card.suit.equals(suit)) {
                 return card;
             }
         }
         return C_JOKER;
     }
 
-    public int getOrder(){
-        return this.order;
+    public int getRank(){
+        return this.rank;
+    }
+
+    public String getType(){
+        return this.type;
     }
 }

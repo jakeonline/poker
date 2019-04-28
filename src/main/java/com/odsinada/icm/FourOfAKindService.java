@@ -1,5 +1,5 @@
 package com.odsinada.icm;
 
 public interface FourOfAKindService {
-    FourOfAKindGroups getGroups(HandBase hand);
+    FourOfAKindGroups getGroups(PokerHand hand);
 }

@@ -18,8 +18,8 @@ public class HighCardTieBreakerTest {
     @Test
     public void shouldIdentifyWInningFirstHand(){
         // arrange
-        HandBase hand1 = new HandBase("6S");
-        HandBase hand2 = new HandBase("5S");
+        PokerHand hand1 = new PokerHand("6S");
+        PokerHand hand2 = new PokerHand("5S");
 
 
         // act
@@ -32,8 +32,8 @@ public class HighCardTieBreakerTest {
     @Test
     public void shouldIdentifyWinningSecondHand(){
         // arrange
-        HandBase hand1 = new HandBase("5S");
-        HandBase hand2 = new HandBase("6S");
+        PokerHand hand1 = new PokerHand("5S");
+        PokerHand hand2 = new PokerHand("6S");
 
 
         // act
@@ -46,8 +46,8 @@ public class HighCardTieBreakerTest {
     @Test
     public void shouldIdentifyWinningFirstHandMiddleCard(){
         // arrange
-        HandBase hand1 = new HandBase("6S 5S 3S");
-        HandBase hand2 = new HandBase("6S 4S 3S");
+        PokerHand hand1 = new PokerHand("6S 5S 3S");
+        PokerHand hand2 = new PokerHand("6S 4S 3S");
 
 
         // act
@@ -60,8 +60,8 @@ public class HighCardTieBreakerTest {
     @Test
     public void shouldIdentifyWinningFirstHandLastCard(){
         // arrange
-        HandBase hand1 = new HandBase("6S 5S 3S");
-        HandBase hand2 = new HandBase("6S 5S 2S");
+        PokerHand hand1 = new PokerHand("6S 5S 3S");
+        PokerHand hand2 = new PokerHand("6S 5S 2S");
 
 
         // act

@@ -1,24 +1,23 @@
 package com.odsinada.icm;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class HandBaseServiceBaseTest {
+public class PokerServiceImplTest {
 
-    HandBaseService service = new HandBaseServiceBase();
-    HandBase hand1, hand2;
+    PokerService service = new PokerServiceImpl();
+    PokerHand hand1, hand2;
 
     @Test
     public void shouldIdentifyWinningFirstHandWithHighCard(){
         // arrange
-        hand1 = new HandBase("5S");
-        hand2 = new HandBase("4D");
+        hand1 = new PokerHand("5S");
+        hand2 = new PokerHand("4D");
 
         // act
-        HandBaseServiceResult result = service.compare(hand1, hand2);
+        PokerResult result = service.compare(hand1, hand2);
 
         // assert
         assertThat(result.getWinner(), equalTo(hand1));
@@ -29,11 +28,11 @@ public class HandBaseServiceBaseTest {
     @Test
     public void shouldIdentifyWinningSecondHandWithHighCard(){
         // arrange
-        hand1 = new HandBase("QS");
-        hand2 = new HandBase("AD");
+        hand1 = new PokerHand("QS");
+        hand2 = new PokerHand("AD");
 
         // act
-        HandBaseServiceResult result = service.compare(hand1, hand2);
+        PokerResult result = service.compare(hand1, hand2);
 
         // assert
         assertThat(result.getLoser(), equalTo(hand1));
@@ -44,14 +43,11 @@ public class HandBaseServiceBaseTest {
     @Test
     public void shouldIdentifyWinningFirstHandWithPair(){
         // arrange
-        hand1 = new HandBase("4S 4C");
-        hand2 = new HandBase("5D");
-
-//        4s4c, 5D..... P, H : -1
-//        5D, 4s4c..... H, P : 1
+        hand1 = new PokerHand("4S 4C");
+        hand2 = new PokerHand("5D");
 
         // act
-        HandBaseServiceResult result = service.compare(hand1, hand2);
+        PokerResult result = service.compare(hand1, hand2);
 
         // assert
         assertThat(result.getWinner(), equalTo(hand1));
@@ -62,11 +58,11 @@ public class HandBaseServiceBaseTest {
     @Test
     public void shouldIdentifyWinningFirstHandWithHigherPair(){
         // arrange
-        hand1 = new HandBase("4S 4C");
-        hand2 = new HandBase("3S 3C");
+        hand1 = new PokerHand("4S 4C");
+        hand2 = new PokerHand("3S 3C");
 
         // act
-        HandBaseServiceResult result = service.compare(hand1, hand2);
+        PokerResult result = service.compare(hand1, hand2);
 
         // assert
         assertThat(result.getWinner(), equalTo(hand1));

@@ -1,7 +1,6 @@
 package com.odsinada.icm;
 
-public class ResultBase implements Result<PokerHand> {
-
+public class PokerResultImpl implements PokerResult {
     private PokerHand winner;
     private PokerHand loser;
 

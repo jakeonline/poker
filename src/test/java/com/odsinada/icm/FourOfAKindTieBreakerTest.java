@@ -7,9 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,7 +19,7 @@ public class FourOfAKindTieBreakerTest {
     @Mock
     FourOfAKindService service;
     @Mock
-    HandBase hand1, hand2;
+    PokerHand hand1, hand2;
     private FourOfAKindTieBreaker tieBreaker;
 
     @Before
@@ -33,10 +31,10 @@ public class FourOfAKindTieBreakerTest {
     public void shouldIdentifyWinningFirstFourOfAKind(){
         // arrange
         FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
         FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("4S 4C 4D 4H")));
+        hand2Group.setCombination(Arrays.asList(new PokerHand("4S 4C 4D 4H")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);
@@ -53,10 +51,10 @@ public class FourOfAKindTieBreakerTest {
     public void shouldIdentifyWinningSecondFourOfAKind(){
         // arrange
         FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
         FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("6S 6C 6D 5H")));
+        hand2Group.setCombination(Arrays.asList(new PokerHand("6S 6C 6D 5H")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);
@@ -73,10 +71,10 @@ public class FourOfAKindTieBreakerTest {
     public void shouldIdentifyTiedFourOfAKind(){
         // arrange
         FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
         FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        hand2Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);
@@ -93,12 +91,12 @@ public class FourOfAKindTieBreakerTest {
     public void shouldIdentifyTiedFourOfAKindWinningFirstFourOfAKind(){
         // arrange
         FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
-        hand1Group.setNonCombination(new HandBase("3S"));
+        hand1Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
+        hand1Group.setNonCombination(new PokerHand("3S"));
 
         FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
-        hand2Group.setNonCombination(new HandBase("2S"));
+        hand2Group.setCombination(Arrays.asList(new PokerHand("5S 5C 5D 5H")));
+        hand2Group.setNonCombination(new PokerHand("2S"));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);

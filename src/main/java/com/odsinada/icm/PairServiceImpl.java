@@ -1,40 +1,43 @@
 package com.odsinada.icm;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PairServiceImpl implements PairService {
 
     @Override
-    public PairGroups getGroups(HandBase hand) {
-        PairGroups pairGroup = new PairGroups();
+    public PokerHandGrouping getGroups(PokerHand hand) {
+        PokerHandGrouping grouping = new PokerHandGrouping();
 
-        List<HandBase> pairs = new ArrayList<>();
+        List<PokerHand> combinations = new ArrayList<>();
 
-        Map<Integer, List<Card>> cardTypeGrouping = new HashMap<>();
-        for (Card eachCard : hand.getCards()) {
+        Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
-            List<Card> cardList = cardTypeGrouping.get(eachCard.getOrder());
-            if (cardList == null) {
-                cardList = new ArrayList<>();
-                cardTypeGrouping.put(eachCard.getOrder(), cardList);
-            }
-
-            cardList.add(eachCard);
-
+        List<Card> pairCards = getPairCards(cardTypeGrouping);
+        if (pairCards != null) {
+            combinations.add(new PokerHand(pairCards));
         }
 
-        Optional<Map.Entry<Integer, List<Card>>> pairCards = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 2).findFirst();
-        if(pairCards.isPresent()){
-            pairs.add(new HandBase(pairCards.get().getValue()));
-        }
+        List<Card> nonPairCards = getNonPairCards(cardTypeGrouping);
 
+        grouping.setCombination(combinations);
+        grouping.setNonCombination(new PokerHand(nonPairCards));
+
+        return grouping;
+    }
+
+    private List<Card> getNonPairCards(Map<String, List<Card>> cardTypeGrouping) {
         List<Card> nonPairCards = new ArrayList<>();
         cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != 2).forEach(t -> nonPairCards.addAll(t.getValue()));
+        return nonPairCards;
+    }
 
-        pairGroup.setPairs(pairs);
-        pairGroup.setNonPair(new HandBase(nonPairCards));
+    private List<Card> getPairCards(Map<String, List<Card>> cardTypeGrouping) {
+        List<Card> pairCards = null;
+        Optional<Map.Entry<String, List<Card>>> pairGroup = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 2).findFirst();
+        if(pairGroup.isPresent()){
+            pairCards = new ArrayList<>(pairGroup.get().getValue());
+        }
 
-        return pairGroup;
+        return pairCards;
     }
 }

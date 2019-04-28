@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class PokerCLI {
+
+    private static final String WHITESPACE = " ";
+
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
 
@@ -13,20 +16,20 @@ public class PokerCLI {
 
         while (input.hasNext()) {
 
-            String[] cards = input.nextLine().split(" ");
+            String[] cards = input.nextLine().split(WHITESPACE);
 
-            StringJoiner hand1Joiner = new StringJoiner(" ");
+            StringJoiner hand1Joiner = new StringJoiner(WHITESPACE);
             for (int i = 0; i < 5; i++) {
                 hand1Joiner.add(cards[i]);
             }
 
-            StringJoiner hand2Joiner = new StringJoiner(" ");
+            StringJoiner hand2Joiner = new StringJoiner(WHITESPACE);
             for (int i = 5; i < 10; i++) {
                 hand2Joiner.add(cards[i]);
             }
 
-            HandBase hand1 = new HandBase(hand1Joiner.toString());
-            HandBase hand2 = new HandBase(hand2Joiner.toString());
+            PokerHand hand1 = new PokerHand(hand1Joiner.toString());
+            PokerHand hand2 = new PokerHand(hand2Joiner.toString());
 
             Result result = hand1.versus(hand2);
             if (hand1 == result.getWinner()) {

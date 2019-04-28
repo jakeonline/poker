@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FullHouseGroups {
-    private List<HandBase> combination = new ArrayList<>();
-    private HandBase nonCombination = new HandBase("");
+    private List<PokerHand> combination = new ArrayList<>();
+    private PokerHand nonCombination = new PokerHand("");
 
-    public List<HandBase> getCombination() {
+    public List<PokerHand> getCombination() {
         return combination;
     }
 
-    public void setCombination(List<HandBase> combination) {
+    public void setCombination(List<PokerHand> combination) {
         this.combination = combination;
     }
 
-    public HandBase getNonCombination() {
+    public PokerHand getNonCombination() {
         return nonCombination;
     }
 
-    public void setNonCombination(HandBase nonCombination) {
+    public void setNonCombination(PokerHand nonCombination) {
         this.nonCombination = nonCombination;
     }
 }

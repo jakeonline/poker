@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PairGroups {
-    private List<HandBase> pairs = new ArrayList<>();
-    private HandBase nonPair = new HandBase("");
+    private List<PokerHand> combination = new ArrayList<>();
+    private PokerHand nonCombination = new PokerHand("");
 
-    public void setPairs(List<HandBase> pairs) {
-        this.pairs = pairs;
+    public void setCombination(List<PokerHand> combination) {
+        this.combination = combination;
     }
 
-    public void setNonPair(HandBase nonPair) {
-        this.nonPair = nonPair;
+    public void setNonCombination(PokerHand nonCombination) {
+        this.nonCombination = nonCombination;
     }
 
-    public List<HandBase> getPairs() {
-        return pairs;
+    public List<PokerHand> getCombination() {
+        return combination;
     }
 
-    public HandBase getNonPair() {
-        return nonPair;
+    public PokerHand getNonCombination() {
+        return nonCombination;
     }
 }

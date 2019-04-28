@@ -4,18 +4,18 @@ import java.util.*;
 
 public class ThreeOfAKindServiceImpl implements ThreeOfAKindService {
     @Override
-    public ThreeOfAKindGroups getGroups(HandBase hand) {
+    public ThreeOfAKindGroups getGroups(PokerHand hand) {
         ThreeOfAKindGroups groups = new ThreeOfAKindGroups();
 
-        List<HandBase> combinations = new ArrayList<>();
+        List<PokerHand> combinations = new ArrayList<>();
 
         Map<Integer, List<Card>> cardTypeGrouping = new HashMap<>();
         for (Card eachCard : hand.getCards()) {
 
-            List<Card> cardList = cardTypeGrouping.get(eachCard.getOrder());
+            List<Card> cardList = cardTypeGrouping.get(eachCard.getRank());
             if (cardList == null) {
                 cardList = new ArrayList<>();
-                cardTypeGrouping.put(eachCard.getOrder(), cardList);
+                cardTypeGrouping.put(eachCard.getRank(), cardList);
             }
 
             cardList.add(eachCard);
@@ -24,14 +24,14 @@ public class ThreeOfAKindServiceImpl implements ThreeOfAKindService {
 
         Optional<Map.Entry<Integer, List<Card>>> combinationGrouping = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 3).findFirst();
         if(combinationGrouping.isPresent()){
-            combinations.add(new HandBase(combinationGrouping.get().getValue()));
+            combinations.add(new PokerHand(combinationGrouping.get().getValue()));
         }
 
         List<Card> nonCombinationCards = new ArrayList<>();
         cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() != 3).forEach(t -> nonCombinationCards.addAll(t.getValue()));
 
         groups.setCombination(combinations);
-        groups.setNonCombination(new HandBase(nonCombinationCards));
+        groups.setNonCombination(new PokerHand(nonCombinationCards));
 
         return groups;
     }
