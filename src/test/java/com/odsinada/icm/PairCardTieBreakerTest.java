@@ -31,12 +31,6 @@ public class PairCardTieBreakerTest {
     @Test
     public void shouldIdentifyWinningFirstPair(){
         // arrange
-        List<HandBase> hand1Pairs = new ArrayList<>();
-        hand1Pairs.add(new HandBase("5S 5C"));
-
-        List<HandBase> hand2Pairs = new ArrayList<>();
-        hand2Pairs.add(new HandBase("4S 4C"));
-
         PairGroups hand1Group = new PairGroups();
         hand1Group.setPairs(Arrays.asList(new HandBase("5S 5C")));
 
@@ -57,12 +51,6 @@ public class PairCardTieBreakerTest {
     @Test
     public void shouldIdentifyWinningSecondPair(){
         // arrange
-        List<HandBase> hand1Pairs = new ArrayList<>();
-        hand1Pairs.add(new HandBase("3S 3C"));
-
-        List<HandBase> hand2Pairs = new ArrayList<>();
-        hand2Pairs.add(new HandBase("4S 4C"));
-
         PairGroups hand1Group = new PairGroups();
         hand1Group.setPairs(Arrays.asList(new HandBase("3S 3C")));
 
@@ -84,12 +72,6 @@ public class PairCardTieBreakerTest {
     @Test
     public void shouldIdentifyTiedPair(){
         // arrange
-        List<HandBase> hand1Pairs = new ArrayList<>();
-        hand1Pairs.add(new HandBase("3S 3C"));
-
-        List<HandBase> hand2Pairs = new ArrayList<>();
-        hand2Pairs.add(new HandBase("3H 3D"));
-
         PairGroups hand1Group = new PairGroups();
         hand1Group.setPairs(Arrays.asList(new HandBase("3S 3C")));
 
@@ -110,12 +92,6 @@ public class PairCardTieBreakerTest {
     @Test
     public void shouldIdentifyTiedPairWinningFirstHand(){
         // arrange
-        List<HandBase> hand1Pairs = new ArrayList<>();
-        hand1Pairs.add(new HandBase("3S 3C 9C"));
-
-        List<HandBase> hand2Pairs = new ArrayList<>();
-        hand2Pairs.add(new HandBase("3H 3D 8C"));
-
         PairGroups hand1Group = new PairGroups();
         hand1Group.setPairs(Arrays.asList(new HandBase("3S 3C")));
         hand1Group.setNonPair(new HandBase("9C"));

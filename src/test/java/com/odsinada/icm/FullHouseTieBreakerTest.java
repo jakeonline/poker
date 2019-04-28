@@ -16,27 +16,27 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 
 @RunWith(value= MockitoJUnitRunner.class)
-public class FourOfAKindTieBreakerTest {
+public class FullHouseTieBreakerTest {
 
     @Mock
-    FourOfAKindService service;
+    FullHouseService service;
     @Mock
     HandBase hand1, hand2;
-    private FourOfAKindTieBreaker tieBreaker;
+    private FullHouseTieBreaker tieBreaker;
 
     @Before
     public void setup(){
-        tieBreaker = new FourOfAKindTieBreaker(service);
+        tieBreaker = new FullHouseTieBreaker(service);
     }
 
     @Test
-    public void shouldIdentifyWinningFirstFourOfAKind(){
+    public void shouldIdentifyWinningFirstFullHouse(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        FullHouseGroups hand1Group = new FullHouseGroups();
+        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D"), new HandBase("4H 4H")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("4S 4C 4D 4H")));
+        FullHouseGroups hand2Group = new FullHouseGroups();
+        hand2Group.setCombination(Arrays.asList(new HandBase("4S 4C 4D"), new HandBase("3H 3D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);
@@ -50,13 +50,13 @@ public class FourOfAKindTieBreakerTest {
     }
 
     @Test
-    public void shouldIdentifyWinningSecondFourOfAKind(){
+    public void shouldIdentifyWinningSecondFullHouse(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        FullHouseGroups hand1Group = new FullHouseGroups();
+        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D"),new HandBase("4H 4D")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("6S 6C 6D 5H")));
+        FullHouseGroups hand2Group = new FullHouseGroups();
+        hand2Group.setCombination(Arrays.asList(new HandBase("6S 6C 6D"), new HandBase("3H 3D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);
@@ -70,13 +70,13 @@ public class FourOfAKindTieBreakerTest {
     }
 
     @Test
-    public void shouldIdentifyTiedFourOfAKind(){
+    public void shouldIdentifyTiedFullHouse(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        FullHouseGroups hand1Group = new FullHouseGroups();
+        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D"),new HandBase("4H 4D")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
+        FullHouseGroups hand2Group = new FullHouseGroups();
+        hand2Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D"),new HandBase("4H 4D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);
@@ -85,20 +85,18 @@ public class FourOfAKindTieBreakerTest {
         int compareResult = tieBreaker.compare(hand1, hand2);
 
         // assert
-        assertThat(compareResult, equalTo(1));
+        assertThat(compareResult, equalTo(0));
 
     }
 
     @Test
-    public void shouldIdentifyTiedFourOfAKindWinningFirstFourOfAKind(){
+    public void shouldIdentifyTiedThreeOfAKindWinningFirstPair(){
         // arrange
-        FourOfAKindGroups hand1Group = new FourOfAKindGroups();
-        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
-        hand1Group.setNonCombination(new HandBase("3S"));
+        FullHouseGroups hand1Group = new FullHouseGroups();
+        hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D"), new HandBase("3S 3D")));
 
-        FourOfAKindGroups hand2Group = new FourOfAKindGroups();
-        hand2Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D 5H")));
-        hand2Group.setNonCombination(new HandBase("2S"));
+        FullHouseGroups hand2Group = new FullHouseGroups();
+        hand2Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D"), new HandBase("2S 2D")));
 
         when(service.getGroups(hand1)).thenReturn(hand1Group);
         when(service.getGroups(hand2)).thenReturn(hand2Group);

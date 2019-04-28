@@ -32,12 +32,6 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyWinningFirstThreeOfAKind(){
         // arrange
-        List<HandBase> hand1Combo = new ArrayList<>();
-        hand1Combo.add(new HandBase("5S 5C 5D"));
-
-        List<HandBase> hand2Combo = new ArrayList<>();
-        hand2Combo.add(new HandBase("4S 4C 4D"));
-
         ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
         hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D")));
 
@@ -58,12 +52,6 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyWinningSecondThreeOfAKind(){
         // arrange
-        List<HandBase> hand1Combo = new ArrayList<>();
-        hand1Combo.add(new HandBase("5S 5C 5D"));
-
-        List<HandBase> hand2Combo = new ArrayList<>();
-        hand2Combo.add(new HandBase("6S 6C 6D"));
-
         ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
         hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D")));
 
@@ -84,12 +72,6 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyTiedThreeOfAKind(){
         // arrange
-        List<HandBase> hand1Combo = new ArrayList<>();
-        hand1Combo.add(new HandBase("5S 5C 5D"));
-
-        List<HandBase> hand2Combo = new ArrayList<>();
-        hand2Combo.add(new HandBase("5S 5C 5D"));
-
         ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
         hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D")));
 
@@ -110,12 +92,6 @@ public class ThreeOfAKindTieBreakerTest {
     @Test
     public void shouldIdentifyTiedThreeOfAKindWinningFirstThreeOfAKind(){
         // arrange
-        List<HandBase> hand1Combo = new ArrayList<>();
-        hand1Combo.add(new HandBase("5S 5C 5D 4S 3s"));
-
-        List<HandBase> hand2Combo = new ArrayList<>();
-        hand2Combo.add(new HandBase("5S 5C 5D 4S 2S"));
-
         ThreeOfAKindGroups hand1Group = new ThreeOfAKindGroups();
         hand1Group.setCombination(Arrays.asList(new HandBase("5S 5C 5D")));
         hand1Group.setNonCombination(new HandBase("4S 3S"));

@@ -23,9 +23,9 @@ public class FourOfAKindServiceImpl implements FourOfAKindService {
 
         }
 
-        Optional<Map.Entry<Integer, List<Card>>> combinationGrouping = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 4).findFirst();
-        if (combinationGrouping.isPresent()) {
-            combinations.add(new HandBase(combinationGrouping.get().getValue()));
+        Optional<Map.Entry<Integer, List<Card>>> combinationFourOfAKind = cardTypeGrouping.entrySet().stream().filter(s -> s.getValue().size() == 4).findFirst();
+        if (combinationFourOfAKind.isPresent()) {
+            combinations.add(new HandBase(combinationFourOfAKind.get().getValue()));
         }
 
         List<Card> nonCombinationCards = new ArrayList<>();
