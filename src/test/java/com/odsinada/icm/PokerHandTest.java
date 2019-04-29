@@ -122,6 +122,18 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyCombinationTwoPairs(){
+        // arrange
+
+        // act
+        // assert
+        assertThat(new PokerHand("5D 5S 6D 6S 7D").getCombinations().contains(Combination.TWO_PAIRS), equalTo(true));
+        assertThat(new PokerHand("5D 5S 6D 7S 8D").getCombinations().contains(Combination.TWO_PAIRS), equalTo(false));
+        assertThat(new PokerHand("5D 6D 7D").getCombinations().contains(Combination.TWO_PAIRS), equalTo(false));
+
+    }
+
+    @Test
     public void shouldIdentifyCombinationThreeOfAKind(){
         // arrange
 
