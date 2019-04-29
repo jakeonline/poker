@@ -208,6 +208,14 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyHighestCombinationStraight(){
+        // arrange
+        // act
+        // assert
+        assertThat(new PokerHand("9D 8D 7C 6D 5S").getHighestCombination(), equalTo(Combination.STRAIGHT));
+    }
+
+    @Test
     public void shouldIdentifyHighestCombinationFullHouse(){
         // arrange
         // act
