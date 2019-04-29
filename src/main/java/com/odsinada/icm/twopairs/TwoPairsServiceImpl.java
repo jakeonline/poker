@@ -4,7 +4,7 @@ import com.odsinada.icm.*;
 
 import java.util.*;
 
-public class TwoPairsServiceImpl implements CombinationService {
+public class TwoPairsServiceImpl implements TwoPairsService {
     private static final int COUNT = 2;
 
     @Override

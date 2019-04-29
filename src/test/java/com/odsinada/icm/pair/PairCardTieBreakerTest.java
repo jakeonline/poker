@@ -72,26 +72,6 @@ public class PairCardTieBreakerTest {
     }
 
     @Test
-    public void shouldIdentifyTiedPair(){
-        // arrange
-        PokerHandGrouping hand1Groups = new PokerHandGrouping();
-        hand1Groups.setCombination(Arrays.asList(new PokerHand("3S 3C")));
-
-        PokerHandGrouping hand2Groups = new PokerHandGrouping();
-        hand2Groups.setCombination(Arrays.asList(new PokerHand("3H 3D")));
-
-        when(service.getGroups(hand1)).thenReturn(hand1Groups);
-        when(service.getGroups(hand2)).thenReturn(hand2Groups);
-
-        // act
-        int compareResult = tieBreaker.compare(hand1, hand2);
-
-        // assert
-        assertThat(compareResult, equalTo(1));
-
-    }
-
-    @Test
     public void shouldIdentifyTiedPairWinningFirstHighCard(){
         // arrange
         PokerHandGrouping hand1Group = new PokerHandGrouping();
