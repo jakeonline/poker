@@ -17,7 +17,7 @@ public class PokerHand implements Hand {
     public PokerHand(String handDetail) {
         if (handDetail.length() > 0) {
             for (String code : handDetail.split(WHITESPACE)) {
-                cards.add(Card.of(code.substring(0, code.length() - 1), code.substring(code.length() - 1, code.length())));
+                cards.add(Card.of(code.substring(0, 1), code.substring(1,2)));
             }
         }
         this.pokerService = new PokerServiceImpl();

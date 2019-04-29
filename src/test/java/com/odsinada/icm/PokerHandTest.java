@@ -159,7 +159,7 @@ public class PokerHandTest {
 
         // act
         // assert
-        assertThat(new PokerHand("7D 10D 5D JD 3D").getCombinations().contains(Combination.FLUSH), equalTo(true));
+        assertThat(new PokerHand("7D TD 5D JD 3D").getCombinations().contains(Combination.FLUSH), equalTo(true));
 
     }
 
@@ -179,7 +179,7 @@ public class PokerHandTest {
 
         // act
         // assert
-        assertThat(new PokerHand("10D JD QD KD AD").getCombinations().contains(Combination.ROYAL_FLUSH), equalTo(true));
+        assertThat(new PokerHand("TD JD QD KD AD").getCombinations().contains(Combination.ROYAL_FLUSH), equalTo(true));
 
     }
 
@@ -250,7 +250,7 @@ public class PokerHandTest {
         // arrange
         // act
         // assert
-        assertThat(new PokerHand("5D 8D 2D 6D 10D").getHighestCombination(), equalTo(Combination.FLUSH));
+        assertThat(new PokerHand("5D 8D 2D 6D TD").getHighestCombination(), equalTo(Combination.FLUSH));
     }
 
     @Test
@@ -266,7 +266,7 @@ public class PokerHandTest {
         // arrange
         // act
         // assert
-        assertThat(new PokerHand("10D JD QD KD AD").getHighestCombination(), equalTo(Combination.ROYAL_FLUSH));
+        assertThat(new PokerHand("TD JD QD KD AD").getHighestCombination(), equalTo(Combination.ROYAL_FLUSH));
     }
 
     @Test

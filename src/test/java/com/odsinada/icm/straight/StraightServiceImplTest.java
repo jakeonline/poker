@@ -40,7 +40,7 @@ public class StraightServiceImplTest {
     public void shouldIdentifyStraight() {
         // arrange
         PokerHand hand1 = new PokerHand("7D 6D 5C 4C 3S");
-        PokerHand hand2 = new PokerHand("AD 10D QC JC KS");
+        PokerHand hand2 = new PokerHand("AD TD QC JC KS");
 
         // act
         // assert

@@ -40,7 +40,7 @@ public class StraightFlushServiceImplTest {
     public void shouldIdentifyStraightFlush() {
         // arrange
         PokerHand hand1 = new PokerHand("7D 6D 5D 4D 3D");
-        PokerHand hand2 = new PokerHand("AD 10D QD JD KD");
+        PokerHand hand2 = new PokerHand("AD TD QD JD KD");
 
         // act
         // assert

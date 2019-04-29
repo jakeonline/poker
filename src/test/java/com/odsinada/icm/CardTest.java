@@ -14,7 +14,7 @@ public class CardTest {
 
         // act
         // assert
-        assertThat(Card.of("10", "H"), equalTo(C10_H));
+        assertThat(Card.of("T", "H"), equalTo(CT_H));
         assertThat(Card.of("J", "D"), equalTo(CJ_D));
         assertThat(Card.of("3", "C"), equalTo(C3_C));
         assertThat(Card.of("A", "S"), equalTo(CA_S));

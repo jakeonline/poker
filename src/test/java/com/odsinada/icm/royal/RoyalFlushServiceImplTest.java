@@ -21,7 +21,7 @@ public class RoyalFlushServiceImplTest {
     @Test
     public void shouldGetRoyalStraightFlushCards() {
         // arrange
-        PokerHand hand1 = new PokerHand("AD KD QD JD 10D");
+        PokerHand hand1 = new PokerHand("AD KD QD JD TD");
 
         // act
         PokerHandGrouping groups = service.getGroups(hand1);
@@ -31,14 +31,14 @@ public class RoyalFlushServiceImplTest {
         assertThat(groups.getCombination().get(0).getCards().contains(Card.of("K", "D")), equalTo(true));
         assertThat(groups.getCombination().get(0).getCards().contains(Card.of("Q", "D")), equalTo(true));
         assertThat(groups.getCombination().get(0).getCards().contains(Card.of("J", "D")), equalTo(true));
-        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("10", "D")), equalTo(true));
+        assertThat(groups.getCombination().get(0).getCards().contains(Card.of("T", "D")), equalTo(true));
         assertThat(groups.getCombination().get(0).getCards().size(), equalTo(5));
     }
 
     @Test
     public void shouldIdentifyRoyalStraightFlush() {
         // arrange
-        PokerHand hand1 = new PokerHand("AD KD QD JD 10D");
+        PokerHand hand1 = new PokerHand("AD KD QD JD TD");
 
         // act
         // assert

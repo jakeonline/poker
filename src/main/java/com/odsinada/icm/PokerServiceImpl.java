@@ -23,8 +23,8 @@ public class PokerServiceImpl implements PokerService {
     }
 
     private void setResult(PokerHand hand1, PokerHand hand2, PokerResult result, int compareResult){
-        boolean isHand1HigherThanHand2 = compareResult == -1;
-        boolean isHand1LowerThanHand2 = compareResult == 1;
+        boolean isHand1HigherThanHand2 = compareResult < 0;
+        boolean isHand1LowerThanHand2 = compareResult > 0;
 
         if (isHand1HigherThanHand2) {
             result.setWinner(hand1);
