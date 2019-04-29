@@ -24,23 +24,21 @@ import java.util.Comparator;
 import static com.odsinada.icm.Combination.Service.*;
 
 public enum Combination {
-    ROYAL_FLUSH(10, null, ROYAL_STRAIGHT_FLUSH_SERVICE)
-    , STRAIGHT_FLUSH(9, new StraightFlushTieBreaker(STRAIGHT_FLUSH_SERVICE), STRAIGHT_FLUSH_SERVICE)
-    , FOUR_OF_A_KIND(8, new FourOfAKindTieBreaker(FOUR_OF_A_KIND_SERVICE), FOUR_OF_A_KIND_SERVICE)
-    , FULL_HOUSE(7, new FullHouseTieBreaker(FULL_HOUSE_SERVICE), FULL_HOUSE_SERVICE)
-    , FLUSH(6, new FlushTieBreaker(FLUSH_SERVICE), FLUSH_SERVICE)
-    , STRAIGHT(5, new StraightTieBreaker(STRAIGHT_SERVICE), STRAIGHT_SERVICE)
-    , THREE_OF_A_KIND(4, new ThreeOfAKindTieBreaker(THREE_OF_A_KIND_SERVICE), THREE_OF_A_KIND_SERVICE)
-    , TWO_PAIRS(3, new TwoPairsTieBreaker(TWO_PAIRS_SERVICE), TWO_PAIRS_SERVICE)
-    , PAIR(2, new PairCardTieBreaker(PAIR_SERVICE), PAIR_SERVICE)
-    , HIGH_CARD(1, new HighCardTieBreaker(), null);
+    ROYAL_FLUSH(null, ROYAL_STRAIGHT_FLUSH_SERVICE)
+    , STRAIGHT_FLUSH(new StraightFlushTieBreaker(STRAIGHT_FLUSH_SERVICE), STRAIGHT_FLUSH_SERVICE)
+    , FOUR_OF_A_KIND(new FourOfAKindTieBreaker(FOUR_OF_A_KIND_SERVICE), FOUR_OF_A_KIND_SERVICE)
+    , FULL_HOUSE(new FullHouseTieBreaker(FULL_HOUSE_SERVICE), FULL_HOUSE_SERVICE)
+    , FLUSH(new FlushTieBreaker(FLUSH_SERVICE), FLUSH_SERVICE)
+    , STRAIGHT(new StraightTieBreaker(STRAIGHT_SERVICE), STRAIGHT_SERVICE)
+    , THREE_OF_A_KIND(new ThreeOfAKindTieBreaker(THREE_OF_A_KIND_SERVICE), THREE_OF_A_KIND_SERVICE)
+    , TWO_PAIRS(new TwoPairsTieBreaker(TWO_PAIRS_SERVICE), TWO_PAIRS_SERVICE)
+    , PAIR(new PairCardTieBreaker(PAIR_SERVICE), PAIR_SERVICE)
+    , HIGH_CARD(new HighCardTieBreaker(), null);
 
-    private final int rank;
     private final CombinationService combinationService;
     private Comparator tieBreaker;
 
-    Combination(int rank, Comparator<PokerHand> tieBreaker, CombinationService combinationService) {
-        this.rank = rank;
+    Combination(Comparator<PokerHand> tieBreaker, CombinationService combinationService) {
         this.tieBreaker = tieBreaker;
         this.combinationService = combinationService;
     }
@@ -51,10 +49,6 @@ public enum Combination {
 
     public CombinationService getCombinationService(){
         return combinationService;
-    }
-
-    public int getRank(){
-        return this.rank;
     }
 
     static class Service {

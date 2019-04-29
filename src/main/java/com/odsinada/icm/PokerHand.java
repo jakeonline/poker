@@ -63,7 +63,8 @@ public class PokerHand implements Hand {
     }
 
     /**
-     * A set of combinations naturally sorted according to rank from highest to lowest (via TreeSet and Combination enum index)
+     * A set of combinations naturally sorted (via TreeSet) according to Combination enum index
+     * i.e. it's rank is as per its declaration in the enum, the lower index, the higher
      */
     private Set<Combination> getPopulatedCombinations() {
         if (combinations == null) {
@@ -84,6 +85,9 @@ public class PokerHand implements Hand {
         return combinations;
     }
 
+    /**
+     * Effectively, the first Combination enum in the Set makes it the highest for this PokerHand
+     * */
     public Combination getHighestCombination() {
         return getPopulatedCombinations().iterator().next();
     }
