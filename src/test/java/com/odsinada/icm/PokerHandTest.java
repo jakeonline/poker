@@ -174,6 +174,16 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyCombinationRoyalFlush(){
+        // arrange
+
+        // act
+        // assert
+        assertThat(new PokerHand("10D JD QD KD AD").getCombinations().contains(Combination.ROYAL_FLUSH), equalTo(true));
+
+    }
+
+    @Test
     public void shouldIdentifyCombinationFourOfAKind(){
         // arrange
 
@@ -249,6 +259,14 @@ public class PokerHandTest {
         // act
         // assert
         assertThat(new PokerHand("9D 8D 7D 6D 5D").getHighestCombination(), equalTo(Combination.STRAIGHT_FLUSH));
+    }
+
+    @Test
+    public void shouldIdentifyHighestCombinationRoyalFlush(){
+        // arrange
+        // act
+        // assert
+        assertThat(new PokerHand("10D JD QD KD AD").getHighestCombination(), equalTo(Combination.ROYAL_FLUSH));
     }
 
     @Test
