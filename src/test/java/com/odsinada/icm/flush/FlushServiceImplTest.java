@@ -41,7 +41,7 @@ public class FlushServiceImplTest {
     @Test
     public void shouldIdentifyFlush() {
         // arrange
-        PokerHand hand1 = new PokerHand("5D 6D 6D 5D 4D");
+        PokerHand hand1 = new PokerHand("5D 6D 7D AD 4D");
 
         // act
         boolean isCombinationPresent = service.isCombinationPresent(hand1);

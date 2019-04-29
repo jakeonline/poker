@@ -16,7 +16,7 @@ public class FlushServiceImpl implements FlushService {
 
         List<Card> flushCards = cardTypeGrouping.entrySet().stream().map(s -> s.getValue().get(0)).collect(Collectors.toList());
 
-        if (getSuits(cardTypeGrouping).size() == 1) {
+        if (flushCards.size() == 5 && FlushServiceUtil.getSuits(cardTypeGrouping).size() == 1) {
             combinations.add(new PokerHand(flushCards));
         }
 
@@ -29,15 +29,12 @@ public class FlushServiceImpl implements FlushService {
     public boolean isCombinationPresent(PokerHand hand) {
         Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
-        if (getSuits(cardTypeGrouping).size() == 1) {
+        List<Card> flushCards = cardTypeGrouping.entrySet().stream().map(s -> s.getValue().get(0)).collect(Collectors.toList());
+
+        if (flushCards.size() == 5 && FlushServiceUtil.getSuits(cardTypeGrouping).size() == 1) {
             return true;
         }
         return false;
     }
 
-    private Set<Card.Suit> getSuits(Map<String, List<Card>> cardTypeGrouping) {
-        Set<Card.Suit> suits = new HashSet<>();
-        cardTypeGrouping.entrySet().stream().map(s -> s.getValue()).forEach(t -> t.forEach( card -> suits.add(card.getSuit())));
-        return suits;
-    }
 }

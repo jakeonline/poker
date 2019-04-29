@@ -1,14 +1,16 @@
-package com.odsinada.icm.straight;
+package com.odsinada.icm.straightflush;
 
 import com.odsinada.icm.Card;
 import com.odsinada.icm.PokerHand;
 import com.odsinada.icm.PokerHandGrouping;
 import com.odsinada.icm.PokerHandUtil;
+import com.odsinada.icm.flush.FlushServiceUtil;
+import com.odsinada.icm.straight.StraightServiceUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class StraightServiceImpl implements StraightService {
+public class StraightFlushServiceImpl implements StraightFlushService {
 
     @Override
     public PokerHandGrouping getGroups(PokerHand hand) {
@@ -19,7 +21,8 @@ public class StraightServiceImpl implements StraightService {
         Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
         List<Card> straightCards = StraightServiceUtil.getStraightCards(cardTypeGrouping);
-        if (straightCards != null) {
+
+        if (!straightCards.isEmpty() && FlushServiceUtil.getSuits(cardTypeGrouping).size() == 1) {
             combinations.add(new PokerHand(straightCards));
         }
 
@@ -28,12 +31,12 @@ public class StraightServiceImpl implements StraightService {
         return grouping;
     }
 
-    @Override
+        @Override
     public boolean isCombinationPresent(PokerHand hand) {
         Map<String, List<Card>> cardTypeGrouping = PokerHandUtil.getCardTypeGrouping(hand);
 
         List<Card> straightCards = StraightServiceUtil.getStraightCards(cardTypeGrouping);
-        if (!straightCards.isEmpty()) {
+        if (!straightCards.isEmpty() && FlushServiceUtil.getSuits(cardTypeGrouping).size() == 1) {
             return true;
         }
         return false;

@@ -11,6 +11,8 @@ import com.odsinada.icm.pair.PairCardTieBreaker;
 import com.odsinada.icm.pair.PairServiceImpl;
 import com.odsinada.icm.straight.StraightServiceImpl;
 import com.odsinada.icm.straight.StraightTieBreaker;
+import com.odsinada.icm.straightflush.StraightFlushServiceImpl;
+import com.odsinada.icm.straightflush.StraightFlushTieBreaker;
 import com.odsinada.icm.threeofakind.ThreeOfAKindServiceImpl;
 import com.odsinada.icm.threeofakind.ThreeOfAKindTieBreaker;
 import com.odsinada.icm.twopairs.TwoPairsServiceImpl;
@@ -19,7 +21,8 @@ import com.odsinada.icm.twopairs.TwoPairsTieBreaker;
 import java.util.Comparator;
 
 public enum Combination {
-    FOUR_OF_A_KIND(8, new FourOfAKindTieBreaker(new FourOfAKindServiceImpl()), new FourOfAKindServiceImpl())
+    STRAIGHT_FLUSH(9, new StraightFlushTieBreaker(new StraightFlushServiceImpl()), new StraightFlushServiceImpl())
+    , FOUR_OF_A_KIND(8, new FourOfAKindTieBreaker(new FourOfAKindServiceImpl()), new FourOfAKindServiceImpl())
     , FULL_HOUSE(7, new FullHouseTieBreaker(new FullHouseServiceImpl()), new FullHouseServiceImpl())
     , FLUSH(6, new FlushTieBreaker(new FlushServiceImpl()), new FlushServiceImpl())
     , STRAIGHT(5, new StraightTieBreaker(new StraightServiceImpl()), new StraightServiceImpl())

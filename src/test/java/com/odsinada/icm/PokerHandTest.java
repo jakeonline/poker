@@ -164,6 +164,16 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyCombinationStraightFlush(){
+        // arrange
+
+        // act
+        // assert
+        assertThat(new PokerHand("7D 6D 5D 4D 3D").getCombinations().contains(Combination.STRAIGHT_FLUSH), equalTo(true));
+
+    }
+
+    @Test
     public void shouldIdentifyCombinationFourOfAKind(){
         // arrange
 
@@ -198,7 +208,7 @@ public class PokerHandTest {
         // arrange
         // act
         // assert
-        assertThat(new PokerHand("5D 6D 7D 5C").getHighestCombination(), equalTo(Combination.PAIR));
+        assertThat(new PokerHand("5D 6D 9D 5C").getHighestCombination(), equalTo(Combination.PAIR));
     }
 
     @Test
@@ -206,7 +216,7 @@ public class PokerHandTest {
         // arrange
         // act
         // assert
-        assertThat(new PokerHand("5D 6D 6C 5C 4S").getHighestCombination(), equalTo(Combination.TWO_PAIRS));
+        assertThat(new PokerHand("5D 6D 6C 5C 3S").getHighestCombination(), equalTo(Combination.TWO_PAIRS));
     }
 
     @Test
@@ -214,7 +224,7 @@ public class PokerHandTest {
         // arrange
         // act
         // assert
-        assertThat(new PokerHand("5D 6D 5S 5C").getHighestCombination(), equalTo(Combination.THREE_OF_A_KIND));
+        assertThat(new PokerHand("5D 6D 5S 5C 9H").getHighestCombination(), equalTo(Combination.THREE_OF_A_KIND));
     }
 
     @Test
@@ -230,7 +240,15 @@ public class PokerHandTest {
         // arrange
         // act
         // assert
-        assertThat(new PokerHand("5D 8D 2D 6D 5D").getHighestCombination(), equalTo(Combination.FLUSH));
+        assertThat(new PokerHand("5D 8D 2D 6D 10D").getHighestCombination(), equalTo(Combination.FLUSH));
+    }
+
+    @Test
+    public void shouldIdentifyHighestCombinationStraightFlush(){
+        // arrange
+        // act
+        // assert
+        assertThat(new PokerHand("9D 8D 7D 6D 5D").getHighestCombination(), equalTo(Combination.STRAIGHT_FLUSH));
     }
 
     @Test
