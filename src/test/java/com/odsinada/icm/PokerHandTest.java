@@ -170,6 +170,14 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyHighestCombinationTwoPairs(){
+        // arrange
+        // act
+        // assert
+        assertThat(new PokerHand("5D 6D 6C 5C 4S").getHighestCombination(), equalTo(Combination.TWO_PAIRS));
+    }
+
+    @Test
     public void shouldIdentifyHighestCombinationThreeOfAKind(){
         // arrange
         // act

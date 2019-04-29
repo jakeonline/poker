@@ -60,7 +60,7 @@ public class PokerHand implements Hand {
     }
 
     /**
-     * A set of combinations naturally sorted according to rank from highest to lowest (via TreeSet)
+     * A set of combinations naturally sorted according to rank from highest to lowest (via TreeSet and Combination enum index)
      * */
     private Set<Combination> getPopulatedCombinations() {
         if (combinations == null) {
