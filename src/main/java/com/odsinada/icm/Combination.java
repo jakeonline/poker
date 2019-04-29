@@ -10,6 +10,7 @@ import com.odsinada.icm.pair.PairServiceImpl;
 import com.odsinada.icm.threeofakind.ThreeOfAKindServiceImpl;
 import com.odsinada.icm.threeofakind.ThreeOfAKindTieBreaker;
 import com.odsinada.icm.twopairs.TwoPairsServiceImpl;
+import com.odsinada.icm.twopairs.TwoPairsTieBreaker;
 
 import java.util.Comparator;
 
@@ -17,7 +18,7 @@ public enum Combination {
     FOUR_OF_A_KIND(8, new FourOfAKindTieBreaker(new FourOfAKindServiceImpl()), new FourOfAKindServiceImpl())
     , FULL_HOUSE(7, new FullHouseTieBreaker(new FullHouseServiceImpl()), new FullHouseServiceImpl())
     , THREE_OF_A_KIND(4, new ThreeOfAKindTieBreaker(new ThreeOfAKindServiceImpl()), new ThreeOfAKindServiceImpl())
-    , TWO_PAIRS(3, null, new TwoPairsServiceImpl())
+    , TWO_PAIRS(3, new TwoPairsTieBreaker(new TwoPairsServiceImpl()), new TwoPairsServiceImpl())
     , PAIR(2, new PairCardTieBreaker(new PairServiceImpl()), new PairServiceImpl())
     , HIGH_CARD(1, new HighCardTieBreaker(), null);
 
