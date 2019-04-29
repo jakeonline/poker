@@ -2,7 +2,10 @@
 ###Instructions
 
 1. Checkout repository at https://github.com/jakeonline/poker
-2. Run mvn -U clean install
+2. Run
+```
+mvn -U clean install
+```
 3. Change directory to target where the poker-1.0-SNAPSHOT.jar has been built
 4. In Windows, run Java application against test file (provide the file path)
 ```
