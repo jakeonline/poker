@@ -104,14 +104,5 @@ public enum Card {
             this.code = code;
         }
 
-        public static Suit fromCode(String code) {
-            switch (code) {
-                case "D": return Suit.DIAMOND;
-                case "H": return Suit.DIAMOND;
-                case "C": return Suit.DIAMOND;
-                case "S": return Suit.DIAMOND;
-                default: return Suit.NONE;
-            }
-        }
     }
 }
