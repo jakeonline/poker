@@ -9,6 +9,7 @@ import com.odsinada.icm.fullhouse.FullHouseTieBreaker;
 import com.odsinada.icm.highcard.HighCardTieBreaker;
 import com.odsinada.icm.pair.PairCardTieBreaker;
 import com.odsinada.icm.pair.PairServiceImpl;
+import com.odsinada.icm.royal.RoyalFlushServiceImpl;
 import com.odsinada.icm.straight.StraightServiceImpl;
 import com.odsinada.icm.straight.StraightTieBreaker;
 import com.odsinada.icm.straightflush.StraightFlushServiceImpl;
@@ -20,15 +21,18 @@ import com.odsinada.icm.twopairs.TwoPairsTieBreaker;
 
 import java.util.Comparator;
 
+import static com.odsinada.icm.Combination.Service.*;
+
 public enum Combination {
-    STRAIGHT_FLUSH(9, new StraightFlushTieBreaker(new StraightFlushServiceImpl()), new StraightFlushServiceImpl())
-    , FOUR_OF_A_KIND(8, new FourOfAKindTieBreaker(new FourOfAKindServiceImpl()), new FourOfAKindServiceImpl())
-    , FULL_HOUSE(7, new FullHouseTieBreaker(new FullHouseServiceImpl()), new FullHouseServiceImpl())
-    , FLUSH(6, new FlushTieBreaker(new FlushServiceImpl()), new FlushServiceImpl())
-    , STRAIGHT(5, new StraightTieBreaker(new StraightServiceImpl()), new StraightServiceImpl())
-    , THREE_OF_A_KIND(4, new ThreeOfAKindTieBreaker(new ThreeOfAKindServiceImpl()), new ThreeOfAKindServiceImpl())
-    , TWO_PAIRS(3, new TwoPairsTieBreaker(new TwoPairsServiceImpl()), new TwoPairsServiceImpl())
-    , PAIR(2, new PairCardTieBreaker(new PairServiceImpl()), new PairServiceImpl())
+    ROYAL_FLUSH(10, null, ROYAL_STRAIGHT_FLUSH_SERVICE)
+    , STRAIGHT_FLUSH(9, new StraightFlushTieBreaker(STRAIGHT_FLUSH_SERVICE), STRAIGHT_FLUSH_SERVICE)
+    , FOUR_OF_A_KIND(8, new FourOfAKindTieBreaker(FOUR_OF_A_KIND_SERVICE), FOUR_OF_A_KIND_SERVICE)
+    , FULL_HOUSE(7, new FullHouseTieBreaker(FULL_HOUSE_SERVICE), FULL_HOUSE_SERVICE)
+    , FLUSH(6, new FlushTieBreaker(FLUSH_SERVICE), FLUSH_SERVICE)
+    , STRAIGHT(5, new StraightTieBreaker(STRAIGHT_SERVICE), STRAIGHT_SERVICE)
+    , THREE_OF_A_KIND(4, new ThreeOfAKindTieBreaker(THREE_OF_A_KIND_SERVICE), THREE_OF_A_KIND_SERVICE)
+    , TWO_PAIRS(3, new TwoPairsTieBreaker(TWO_PAIRS_SERVICE), TWO_PAIRS_SERVICE)
+    , PAIR(2, new PairCardTieBreaker(PAIR_SERVICE), PAIR_SERVICE)
     , HIGH_CARD(1, new HighCardTieBreaker(), null);
 
     private final int rank;
@@ -47,5 +51,17 @@ public enum Combination {
 
     public CombinationService getCombinationService(){
         return combinationService;
+    }
+
+    static class Service {
+        public static final RoyalFlushServiceImpl ROYAL_STRAIGHT_FLUSH_SERVICE = new RoyalFlushServiceImpl();
+        public static final StraightFlushServiceImpl STRAIGHT_FLUSH_SERVICE = new StraightFlushServiceImpl();
+        public static final FourOfAKindServiceImpl FOUR_OF_A_KIND_SERVICE = new FourOfAKindServiceImpl();
+        public static final FullHouseServiceImpl FULL_HOUSE_SERVICE = new FullHouseServiceImpl();
+        public static final FlushServiceImpl FLUSH_SERVICE = new FlushServiceImpl();
+        public static final StraightServiceImpl STRAIGHT_SERVICE = new StraightServiceImpl();
+        public static final ThreeOfAKindServiceImpl THREE_OF_A_KIND_SERVICE = new ThreeOfAKindServiceImpl();
+        public static final TwoPairsServiceImpl TWO_PAIRS_SERVICE = new TwoPairsServiceImpl();
+        public static final PairServiceImpl PAIR_SERVICE = new PairServiceImpl();
     }
 }
