@@ -154,6 +154,16 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyCombinationFlush(){
+        // arrange
+
+        // act
+        // assert
+        assertThat(new PokerHand("7D 10D 5D JD 3D").getCombinations().contains(Combination.FLUSH), equalTo(true));
+
+    }
+
+    @Test
     public void shouldIdentifyCombinationFourOfAKind(){
         // arrange
 
@@ -213,6 +223,14 @@ public class PokerHandTest {
         // act
         // assert
         assertThat(new PokerHand("9D 8D 7C 6D 5S").getHighestCombination(), equalTo(Combination.STRAIGHT));
+    }
+
+    @Test
+    public void shouldIdentifyHighestCombinationFlush(){
+        // arrange
+        // act
+        // assert
+        assertThat(new PokerHand("5D 8D 2D 6D 5D").getHighestCombination(), equalTo(Combination.FLUSH));
     }
 
     @Test
