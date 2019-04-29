@@ -1,20 +1,23 @@
 package com.odsinada.icm;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static com.odsinada.icm.Card.C_JOKER;
 
 public class PokerHand implements Hand {
 
     private static final String WHITESPACE = " ";
-    private PokerService pokerService;
     private final List<Card> cards = new ArrayList<>(5);
+    private PokerService pokerService;
     private Set<Combination> combinations = null;
 
     public PokerHand(String handDetail) {
         if (handDetail.length() > 0) {
             for (String code : handDetail.split(WHITESPACE)) {
-                cards.add(Card.of(code.substring(0,1), code.substring(1,2)));
+                cards.add(Card.of(code.substring(0, code.length() - 1), code.substring(code.length() - 1, code.length())));
             }
         }
         this.pokerService = new PokerServiceImpl();
@@ -51,7 +54,7 @@ public class PokerHand implements Hand {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.cards.toString();
     }
 
@@ -61,7 +64,7 @@ public class PokerHand implements Hand {
 
     /**
      * A set of combinations naturally sorted according to rank from highest to lowest (via TreeSet and Combination enum index)
-     * */
+     */
     private Set<Combination> getPopulatedCombinations() {
         if (combinations == null) {
             combinations = new TreeSet<>();
@@ -72,7 +75,7 @@ public class PokerHand implements Hand {
 
             for (Combination combination : Combination.values()) {
                 CombinationService combinationService = combination.getCombinationService();
-                if( combinationService != null && combinationService.isCombinationPresent(this)){
+                if (combinationService != null && combinationService.isCombinationPresent(this)) {
                     combinations.add(combination);
                 }
             }

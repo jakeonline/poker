@@ -144,6 +144,16 @@ public class PokerHandTest {
     }
 
     @Test
+    public void shouldIdentifyCombinationStraight(){
+        // arrange
+
+        // act
+        // assert
+        assertThat(new PokerHand("7D 6S 5C 4H 3H").getCombinations().contains(Combination.STRAIGHT), equalTo(true));
+
+    }
+
+    @Test
     public void shouldIdentifyCombinationFourOfAKind(){
         // arrange
 
